@@ -6,6 +6,7 @@
 This case study demonstrates how structured prompt design, evaluation, and guardrails
 significantly improve LLM reliability and reduce hallucinations.
 
+
 🧠 LLM Prompt Engineering Case Study
 
 Improving LLM Reliability Through Structured Prompt Design & Evaluation
@@ -163,4 +164,10 @@ Collaborate with engineering-focused AI workflows
 **📎 Prompt Engineering Case Study (1-Page PDF)**
 
 https://github.com/sarahsair25/llm-prompt-engineering-case-study/blob/main/Prompt_Engineering_Case_Study_Sarah_Sair-.pdf
+
+## 🔬 Prompt Evaluation Script (Python)
+
+This repo includes a lightweight prompt evaluation harness that runs a test suite, scores outputs (JSON compliance, required keys, safety/uncertainty behavior), and exports results to CSV/JSONL.
+
+
 

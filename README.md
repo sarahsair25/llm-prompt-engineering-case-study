@@ -12,7 +12,10 @@ Improving LLM Reliability Through Structured Prompt Design & Evaluation
 
 A practical case study illustrating how structured prompt architecture, evaluation, and guardrails substantially enhance Large Language Model (LLM) accuracy, reasoning consistency, and safety. 
 
-Author: Sarah Sair – Prompt Engineer | AI Reliability
+**👩‍💻 Author**
+
+Sarah Sair
+Prompt Engineer | LLM Optimization | AI Reliability
 
 **📌 Overview**
 

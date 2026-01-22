@@ -144,7 +144,7 @@ Evaluation loops dramatically improve reliability
 
 Prompt design is critical for production LLM workflows
 
-🚀 Why This Matters
+**🚀 Why This Matters**
 
 This project demonstrates my ability to:
 

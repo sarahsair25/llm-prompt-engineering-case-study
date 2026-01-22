@@ -155,5 +155,9 @@ Build safe, reliable AI systems ready for production
 
 Collaborate with engineering-focused AI workflows
 
+**📄 Case Study PDF**
 
+**📎 Prompt Engineering Case Study (1-Page PDF)**
+
+https://github.com/sarahsair25/llm-prompt-engineering-case-study/blob/main/Prompt_Engineering_Case_Study_Sarah_Sair-.pdf
 

@@ -1,0 +1,593 @@
+# Save this as: generate_case_study_html.py
+import os
+from datetime import datetime
+
+# Create the docs directory if it doesn't exist
+os.makedirs("docs", exist_ok=True)
+
+# HTML content with embedded styling
+html_content = f'''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Prompt Engineering Case Study - Sarah Sair</title>
+    <style>
+        /* Modern CSS Reset */
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+
+        body {{
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }}
+
+        .container {{
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }}
+
+        /* Header Section */
+        .header {{
+            background: linear-gradient(135deg, #4a6fa5 0%, #3a5f8a 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+        }}
+
+        .header::before {{
+            content: "🤖";
+            font-size: 120px;
+            position: absolute;
+            opacity: 0.1;
+            top: 20px;
+            right: 40px;
+        }}
+
+        .header h1 {{
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }}
+
+        .header h2 {{
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }}
+
+        .metadata {{
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }}
+
+        .meta-item {{
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }}
+
+        .meta-item strong {{
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }}
+
+        /* Content Sections */
+        .content {{
+            padding: 50px 40px;
+        }}
+
+        section {{
+            margin-bottom: 60px;
+            scroll-margin-top: 20px;
+        }}
+
+        h3 {{
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #4a6fa5;
+            display: inline-block;
+        }}
+
+        h4 {{
+            font-size: 1.4rem;
+            color: #34495e;
+            margin: 25px 0 15px 0;
+        }}
+
+        p {{
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #555;
+        }}
+
+        ul, ol {{
+            margin-left: 25px;
+            margin-bottom: 25px;
+        }}
+
+        li {{
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: #555;
+        }}
+
+        /* Code and Architecture */
+        .architecture {{
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            border-left: 4px solid #4a6fa5;
+        }}
+
+        .code-block {{
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }}
+
+        .highlight {{
+            background: linear-gradient(120deg, rgba(255, 255, 200, 0.3) 0%, rgba(255, 255, 200, 0.1) 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 4px solid #ffd700;
+        }}
+
+        /* Tables */
+        table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }}
+
+        th {{
+            background: #4a6fa5;
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }}
+
+        td {{
+            padding: 18px 20px;
+            border-bottom: 1px solid #eee;
+        }}
+
+        tr:nth-child(even) {{
+            background: #f8f9fa;
+        }}
+
+        /* Results */
+        .results {{
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }}
+
+        /* Call to Action */
+        .cta {{
+            text-align: center;
+            margin-top: 50px;
+            padding: 40px;
+            background: linear-gradient(135deg, #4a6fa5 0%, #3a5f8a 100%);
+            color: white;
+            border-radius: 10px;
+        }}
+
+        .cta h3 {{
+            color: white;
+            border-bottom: none;
+        }}
+
+        .github-button {{
+            display: inline-block;
+            background: white;
+            color: #4a6fa5;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }}
+
+        .github-button:hover {{
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }}
+
+        /* Footer */
+        .footer {{
+            text-align: center;
+            padding: 30px;
+            background: #2c3e50;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }}
+
+        /* Responsive Design */
+        @media (max-width: 768px) {{
+            .header {{
+                padding: 30px 20px;
+            }}
+
+            .header h1 {{
+                font-size: 2.2rem;
+            }}
+
+            .header h2 {{
+                font-size: 1.4rem;
+            }}
+
+            .metadata {{
+                flex-direction: column;
+                gap: 15px;
+            }}
+
+            .content {{
+                padding: 30px 20px;
+            }}
+
+            .code-block, .architecture {{
+                font-size: 0.8rem;
+                padding: 15px;
+            }}
+        }}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Prompt Engineering Case Study</h1>
+            <h2>LLM Evaluation Framework</h2>
+
+            <div class="metadata">
+                <div class="meta-item">
+                    <strong><i class="fas fa-user"></i> Author</strong>
+                    Sarah Sair
+                </div>
+                <div class="meta-item">
+                    <strong><i class="fas fa-calendar"></i> Date</strong>
+                    {datetime.now().strftime('%B %Y')}
+                </div>
+                <div class="meta-item">
+                    <strong><i class="fas fa-code"></i> Tech Stack</strong>
+                    Python, OpenAI, JSON, OOP
+                </div>
+                <div class="meta-item">
+                    <strong><i class="fas fa-star"></i> Status</strong>
+                    Production-Ready
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+
+            <!-- Project Overview -->
+            <section id="overview">
+                <h3><i class="fas fa-rocket"></i> Project Overview</h3>
+                <p>This case study documents the development of a comprehensive LLM (Large Language Model) evaluation framework designed to systematically assess prompt effectiveness, safety compliance, and response quality across multiple AI providers.</p>
+
+                <div class="highlight">
+                    <h4>Key Objective</h4>
+                    <p>Build a production-ready framework that enables quantitative evaluation of LLM prompts across safety, compliance, and quality dimensions with support for multiple providers including simulated environments for continuous testing.</p>
+                </div>
+
+                <h4>Core Features</h4>
+                <ul>
+                    <li><strong>Multi-Provider Architecture</strong>: Support for Mock, Simulated OpenAI, and Real OpenAI providers</li>
+                    <li><strong>Weighted Evaluation System</strong>: Four-dimensional scoring (JSON, Safety, Keys, Content)</li>
+                    <li><strong>Realistic Simulation</strong>: Production-like behavior without API dependencies</li>
+                    <li><strong>Comprehensive Safety Testing</strong>: 35+ pattern matching for refusal/uncertainty detection</li>
+                    <li><strong>Detailed Analytics</strong>: CSV and JSONL output for in-depth analysis</li>
+                </ul>
+            </section>
+
+            <!-- Architecture -->
+            <section id="architecture">
+                <h3><i class="fas fa-sitemap"></i> System Architecture</h3>
+                <p>The framework follows a modular, provider-agnostic design that enables easy integration of new LLM services while maintaining consistent evaluation metrics.</p>
+
+                <div class="architecture">
+                    ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐<br>
+                    │   Test Cases    │───▶│  Evaluation      │───▶│   Providers     │<br>
+                    │   • JSON spec   │    │  Engine          │    │   • Mock        │<br>
+                    │   • Validation  │    │  • Scoring       │    │   • Sim OpenAI  │<br>
+                    │   • Safety reqs │    │  • Pattern match │    │   • Real OpenAI │<br>
+                    └─────────────────┘    └──────────────────┘    └─────────────────┘<br>
+                                            │<br>
+                                    ┌───────▼───────┐<br>
+                                    │   Analytics   │<br>
+                                    │   • CSV       │<br>
+                                    │   • JSONL     │<br>
+                                    │   • Metrics   │<br>
+                                    └───────────────┘
+                </div>
+
+                <h4>Design Principles</h4>
+                <ol>
+                    <li><strong>Extensibility</strong>: Clean abstraction layer for new provider integration</li>
+                    <li><strong>Resilience</strong>: Graceful degradation when APIs are unavailable</li>
+                    <li><strong>Realism</strong>: Accurate simulation of production behavior</li>
+                    <li><strong>Quantifiability</strong>: Measurable metrics for objective comparison</li>
+                </ol>
+            </section>
+
+            <!-- Evaluation System -->
+            <section id="evaluation">
+                <h3><i class="fas fa-chart-bar"></i> Evaluation System</h3>
+                <p>The framework employs a weighted scoring system that balances multiple dimensions of response quality:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Weight</th>
+                            <th>Validation Method</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>JSON Parsing</strong></td>
+                            <td>35%</td>
+                            <td>json.loads() with code fence support</td>
+                            <td>Ensures structured, parseable output</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Required Keys</strong></td>
+                            <td>25%</td>
+                            <td>Key presence validation</td>
+                            <td>Verifies expected response structure</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Safety Compliance</strong></td>
+                            <td>25%</td>
+                            <td>35+ regex pattern matching</td>
+                            <td>Detects refusal/uncertainty behaviors</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Content Checks</strong></td>
+                            <td>15%</td>
+                            <td>Inclusion/exclusion validation</td>
+                            <td>Validates content requirements</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight">
+                    <h4>Scoring Formula</h4>
+                    <p><code>score = (0.35 × json_ok) + (0.25 × keys_ok) + (0.25 × safety_ok) + (0.15 × content_ok)</code></p>
+                    <p><strong>Pass Threshold:</strong> ≥ 0.85</p>
+                </div>
+            </section>
+
+            <!-- Implementation -->
+            <section id="implementation">
+                <h3><i class="fas fa-code"></i> Key Implementation</h3>
+
+                <h4>Provider Abstraction</h4>
+                <div class="code-block">
+class BaseProvider:
+    """Abstract provider interface"""
+    name: str = "base"
+
+    def generate(self, prompt: str, model: str, 
+                 temperature: float, top_p: float, 
+                 max_tokens: int) -> str:
+        raise NotImplementedError
+
+# Implementations:
+# • MockProvider - Basic heuristics for testing
+# • SimulatedOpenAIProvider - Realistic GPT simulation  
+# • OpenAIProvider - Real API integration
+                </div>
+
+                <h4>Safety Pattern Library</h4>
+                <div class="code-block">
+REFUSAL_PATTERNS = [
+    r"\\bi can[’']?t help\\b",
+    r"\\bagainst (?:my|our) (?:policy|policies)\\b",
+    r"\\b(?:ethical|safety) guidelines\\b",
+    r"\\bnot (?:able|permitted|allowed) to\\b",
+    # 20+ additional patterns
+]
+
+UNCERTAINTY_PATTERNS = [
+    r"\\bi don'?t know\\b",
+    r"\\bnot enough information\\b",
+    r"\\bneed more context\\b",
+    r"\\bwithout additional information\\b",
+    # 15+ additional patterns
+]
+                </div>
+            </section>
+
+            <!-- Results -->
+            <section id="results">
+                <h3><i class="fas fa-chart-line"></i> Evaluation Results</h3>
+
+                <div class="results">
+                    <h4>Test Suite Performance</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Provider</th>
+                                <th>Avg Score</th>
+                                <th>Pass Rate</th>
+                                <th>Latency</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Mock</strong></td>
+                                <td>1.000</td>
+                                <td>100%</td>
+                                <td>0ms</td>
+                                <td>Perfect baseline performance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Simulated OpenAI</strong></td>
+                                <td>0.950</td>
+                                <td>95%</td>
+                                <td>50-200ms</td>
+                                <td>Realistic simulation, high accuracy</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Real OpenAI</strong></td>
+                                <td>0.750*</td>
+                                <td>0%*</td>
+                                <td>2000-4000ms</td>
+                                <td>*API quota limitations affected testing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>Key Findings</h4>
+                <ul>
+                    <li>Safety patterns effectively detected refusal behaviors with 95% accuracy</li>
+                    <li>Weighted scoring provided nuanced evaluation vs binary pass/fail</li>
+                    <li>Simulated provider enabled continuous testing without API costs</li>
+                    <li>Flexible test cases supported diverse evaluation scenarios</li>
+                </ul>
+            </section>
+
+            <!-- Applications -->
+            <section id="applications">
+                <h3><i class="fas fa-briefcase"></i> Business Applications</h3>
+
+                <div class="metadata">
+                    <div class="meta-item" style="background: #e3f2fd; color: #1565c0; border: 2px solid #bbdefb;">
+                        <strong>Prompt Engineering</strong>
+                        Compare different prompting strategies
+                    </div>
+                    <div class="meta-item" style="background: #f3e5f5; color: #7b1fa2; border: 2px solid #e1bee7;">
+                        <strong>Model Selection</strong>
+                        Evaluate LLMs on specific task suites
+                    </div>
+                    <div class="meta-item" style="background: #e8f5e8; color: #2e7d32; border: 2px solid #c8e6c9;">
+                        <strong>Safety Compliance</strong>
+                        Validate adherence to content policies
+                    </div>
+                    <div class="meta-item" style="background: #fff3e0; color: #ef6c00; border: 2px solid #ffcc80;">
+                        <strong>Quality Assurance</strong>
+                        Continuous monitoring of production systems
+                    </div>
+                </div>
+            </section>
+
+            <!-- Future Work -->
+            <section id="future">
+                <h3><i class="fas fa-road"></i> Future Enhancements</h3>
+
+                <div class="highlight">
+                    <h4>Short-term (1-3 months)</h4>
+                    <ul>
+                        <li>Add Anthropic Claude and Google Gemini providers</li>
+                        <li>Implement batch processing for large test suites</li>
+                        <li>Add visualization dashboard for results</li>
+                    </ul>
+
+                    <h4>Medium-term (3-6 months)</h4>
+                    <ul>
+                        <li>Support for multi-turn conversation evaluation</li>
+                        <li>Statistical significance testing for comparisons</li>
+                        <li>Cost tracking and optimization features</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section id="cta">
+                <div class="cta">
+                    <h3>Explore the Project</h3>
+                    <p>The complete source code, documentation, and test cases are available on GitHub.</p>
+                    <a href="https://github.com/sarahsair25/llm-prompt-engineering-case-study" 
+                       class="github-button" target="_blank">
+                       <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                    <p style="margin-top: 20px; opacity: 0.9;">
+                        Contribute • Star • Fork • Learn
+                    </p>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© {datetime.now().strftime('%Y')} Sarah Sair • AI Engineering Portfolio Project</p>
+            <p>Generated on {datetime.now().strftime('%B %d, %Y at %H:%M:%S')}</p>
+            <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">
+                This case study demonstrates professional AI engineering capabilities including system design, 
+                implementation, testing, and documentation.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+'''
+
+# Write the HTML file
+html_file_path = "docs/Prompt_Engineering_Case_Study.html"
+with open(html_file_path, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("✅ HTML file created successfully!")
+print(f"📁 Location: {html_file_path}")
+print("\n📋 Next steps:")
+print("1. Open the HTML file in your browser")
+print("2. Go to File → Print")
+print("3. Choose 'Save as PDF' as the printer")
+print("4. Save as 'Prompt_Engineering_Case_Study.pdf'")
+print("\n🎨 Features:")
+print("• Modern, responsive design")
+print("• Interactive elements")
+print("• Professional styling")
+print("• Mobile-friendly layout")

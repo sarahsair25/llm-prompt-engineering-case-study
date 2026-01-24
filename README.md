@@ -193,18 +193,19 @@ Add cost tracking and optimization features
 
 Create Docker container for easy deployment
 
-🤝 Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
+**🚀 Why This Matters**
 
-Fork the repository
+This project demonstrates my ability to:
 
-Create your feature branch (git checkout -b feature/AmazingFeature)
+Translate human intent into machine-executable instructions
 
-Commit your changes (git commit -m 'Add some AmazingFeature')
+Design scalable prompt architectures
 
-Push to the branch (git push origin feature/AmazingFeature)
+Evaluate and optimize LLM behavior
 
-Open a Pull Request
+Build safe, reliable AI systems ready for production
+
+Collaborate with engineering-focused AI workflows
 
 
 **📎 Prompt Engineering Case Study **

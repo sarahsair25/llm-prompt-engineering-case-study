@@ -185,12 +185,10 @@ Push to the branch (git push origin feature/AmazingFeature)
 
 Open a Pull Request
 
-📝 License
-This project is licensed under the MIT License - see the LICENSE file for de
 
 **📎 Prompt Engineering Case Study **
 
-https://github.com/sarahsair25/llm-prompt-engineering-case-study/blob/main/Prompt_Engineering_Case_Study_Sarah_Sair-.pdf
+https://github.com/sarahsair25/llm-prompt-engineering-case-study/blob/main/Prompt_Engineering_Case_Study_Sarah_Sair-.pdf.pdf
 
  **🔬 Prompt Evaluation Script (Python)**
 

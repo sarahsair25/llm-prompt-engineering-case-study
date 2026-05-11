@@ -14,26 +14,9 @@ A professional-grade evaluation framework for testing Large Language Model (LLM)
 Large Language Models (LLMs) often produce hallucinations, inconsistent reasoning, and unstructured outputs, especially when handling complex or ambiguous user inputs.
 The goal of this project was to design, test, and optimize prompts that improve reasoning quality, reduce hallucinations, and produce reliable, production-ready outputs.
 
-What This Does
-A Python-based evaluation harness that runs your prompts through structured test cases and scores them across four dimensions:
-Metric
-Weight
-What it checks
-JSON Parsing
-35%
-Is the output valid, parseable JSON?
-Required Keys
-25%
-Are the fields your app depends on actually there?
-Safety Compliance
-25%
-Does the model refuse what it should refuse?
-Content Rules
-15%
-Inclusion/exclusion of specific content
+# LLM Evaluation Harness
+A Python-based evaluation harness that runs your prompts through structured test cases and scores them across four dimensions. ## What This Does Ensures prompt/model quality by evaluating structured outputs: | Metric | Weight | What it checks | | :--- | :--- | :--- | | **JSON Parsing** | 35% | Is the output valid, parseable JSON? | | **Required Keys** | 25% | Are the fields your app depends on actually there? | | **Safety Compliance**| 25% | Does the model refuse what it should refuse? | | **Content Rules** | 15% | Inclusion/exclusion of specific content | **Pass threshold: 0.85 / 1.0** ## Features * **Regression Tracking:** Every test run exports to CSV and JSONL so you can track performance over time, not just today's score. * **Structured Output:** Emits structured results for auditing. 
 
-Pass threshold: 0.85 / 1.0
-Every test run exports to CSV and JSONL so you can track regression over time, not just today's score.
 
 
 ## 🚀 Professional Features

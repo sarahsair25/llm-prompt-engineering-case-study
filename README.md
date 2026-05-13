@@ -214,8 +214,7 @@ Collaborate with engineering-focused AI workflows
 
 
 **📎 Prompt Engineering Case Study **
-
-/github.com/sarahsair25/llm-prompt-engineering-case-study/blob/main/Prompt_Engineering_Case_Study_Sarah_Sair-.pdf.pdf
+https://github.com/sarahsair25/llm-prompt-engineering-case-study/blob/main/Prompt%20Enginerimg%20Case%20Study%20_sarahSair.pdf
 
 
  **🔬 Prompt Evaluation Script (Python)**

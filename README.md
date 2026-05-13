@@ -140,7 +140,8 @@ GPT-4 · Gemini · Claude
 
 Evaluation criteria: accuracy, reasoning consistency, hallucination rate, output structure compliance.
 
-Full case study: [Prompt Engineering Case Study (PDF)](https://github.com/sarahsair25/llm-prompt-engineering-case-study/blob/main/Prompt%20Enginerimg%20Case%20Study%20_sarahSair.pdf)
+Full case study: [Prompt Engineering Case Study (PDF)](https://github.com/sarahsair25/llm-prompt-engineering-case-study/blob/main/Prompt%20Enginerimg%20Case%20Study%20_sarahSair.pdf
+)
 
 ---
 
